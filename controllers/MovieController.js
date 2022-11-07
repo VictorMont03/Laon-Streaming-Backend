@@ -72,6 +72,18 @@ class MovieController {
       res.json({ message: err.message });
     }
   }
+
+  async getMovieCategories(req, res) {
+    try {
+      var categories = await Movie.getCategories();
+      res.status(200);
+      res.json(categories);
+    } catch (err) {
+      console.log(err);
+      res.status(500);
+      res.json({ message: err.message });
+    }
+  }
 }
 
 module.exports = new MovieController();

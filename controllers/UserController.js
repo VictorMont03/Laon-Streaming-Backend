@@ -27,7 +27,7 @@ class UserController {
     await User.new(name, email, password);
 
     res.status(200);
-    res.send("User created");
+    res.json({ message: "User created" });
   }
 
   async createAdmin(req, res) {

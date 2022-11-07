@@ -1,9 +1,7 @@
-class HomeController{
-
-    async index(req, res){
-        res.send("APP EXPRESS! - Guia do programador");
-    }
-
+class HomeController {
+  async index(req, res) {
+    res.send("API EXPRESS");
+  }
 }
 
 module.exports = new HomeController();

@@ -28,5 +28,6 @@ router.put("/movie", MovieController.delete);
 router.get("/:id/movie", MovieController.getMoviesByCategory);
 router.get("/movie/:slug", MovieController.getMovieBySlug);
 router.get("/movie", MovieController.getAllMovies);
+router.get("/movie-categories", MovieController.getMovieCategories);
 
 module.exports = router;

@@ -13,6 +13,7 @@ class Movie {
       awards,
       director,
       rating,
+      category_ids,
       synopsis,
     } = movie;
 
@@ -39,6 +40,22 @@ class Movie {
         synopsis,
       })
       .table("movies");
+
+    const created_movie = await this.getMovieBySlug(slug);
+    const film_id = created_movie.movie.id;
+
+    category_ids.map(async (category_id) => {
+      try {
+        await knex
+          .insert({
+            film_id,
+            category_id,
+          })
+          .table("films_categories_relation");
+      } catch (e) {
+        console.log(e);
+      }
+    });
   }
 
   async listAll() {
@@ -113,6 +130,23 @@ class Movie {
     } catch (e) {
       console.log(e);
       return { status: false, err: "Could not find the any movies" };
+    }
+  }
+
+  async getCategories() {
+    try {
+      var result = await knex
+        .select(["id", "title", "slug"])
+        .table("films-categories");
+
+      if (result.length == 0) {
+        return undefined;
+      }
+
+      return result;
+    } catch (e) {
+      console.log(e);
+      return { status: false, err: "Could not find the any category" };
     }
   }
 }
